@@ -38,9 +38,12 @@ resource "docker_container" "grafana" {
 resource "docker_container" "mysql" {
   image = docker_image.mysql.image_id
   name  = "MySQL_consumption"
+  env = [ "MYSQL_RANDOM_ROOT_PASSWORD=yes"]
+  
   ports {
     internal = 3306
     external = 3306
   }
+
 }
 
