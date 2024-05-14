@@ -6,3 +6,8 @@ CREATE TABLE electric (
   interval_end datetime DEFAULT NULL,
   PRIMARY KEY (`interval_start`)
 );
+
+-- create a limited user to access the energy data from grafana
+-- Obviously don't use this password for real!
+CREATE USER 'grafanauser'@'%' IDENTIFIED BY 'passw0rd';
+GRANT SELECT ON energy.* TO 'grafanauser'@'%';
