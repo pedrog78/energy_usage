@@ -22,6 +22,13 @@ resource "docker_image" "grafana" {
   keep_locally = false
 }
 
+
+#### Docker network
+resource "docker_network" "energy_network" {
+   name = "energy_network"
+}
+
+
 #### Container resource definistions
 
 #Grafana
@@ -31,6 +38,9 @@ resource "docker_container" "grafana" {
   ports {
     internal = 3000
     external = 3000
+  }
+  networks_advanced {
+    name="energy_network"
   }
 }
 
@@ -43,6 +53,9 @@ resource "docker_container" "mysql" {
   ports {
     internal = 3306
     external = 3306
+  }
+  networks_advanced {
+    name="energy_network"
   }
 
 }
