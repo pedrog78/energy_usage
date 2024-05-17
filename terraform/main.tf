@@ -9,6 +9,12 @@ terraform {
 
 provider "docker" {}
 
+#### Set up input variables
+variable "mysql_pass" {
+  type=string
+  description="The initial root password that will be set for mysql"
+  sensitive=true
+}
 
 #### Image resource definitions
 
@@ -48,7 +54,7 @@ resource "docker_container" "grafana" {
 resource "docker_container" "mysql" {
   image = docker_image.mysql.image_id
   name  = "MySQL_consumption"
-  env = [ "MYSQL_RANDOM_ROOT_PASSWORD=yes"]
+  env = [ "MYSQL_ROOT_PASSWORD=${var.mysql_pass}"]
   
   ports {
     internal = 3306
