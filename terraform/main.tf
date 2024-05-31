@@ -68,8 +68,7 @@ resource "docker_container" "grafana" {
   }
   volumes {
     read_only = true
-    host_path= "${var.grafana_datasource}" 
-    #host_path="/home/peter/scripts/sourcecontrolled/energy_usage/grafana"
+    host_path= "${var.grafana_datasource}"
     container_path="/etc/grafana/provisioning/datasources"
 
   }
