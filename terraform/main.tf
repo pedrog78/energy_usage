@@ -16,6 +16,22 @@ variable "mysql_pass" {
   sensitive=true
 }
 
+variable "grafana_datasource" {
+  type=string
+  description="Absolute path to the datasource directory to be mounted"
+}
+
+variable "mysql_grafana_user" {
+  type=string
+  description="Read only user for the mysql datasource"
+}
+
+variable "mysql_grafana_user_pass" {
+  type=string
+  description="Password for the mysql datasource"
+  sensitive=true
+}
+
 #### Image resource definitions
 
 resource "docker_image" "mysql" {
@@ -35,15 +51,27 @@ resource "docker_network" "energy_network" {
 }
 
 
+
+
 #### Container resource definistions
 
 #Grafana
 resource "docker_container" "grafana" {
   image = docker_image.grafana.image_id
   name  = "grafana_dashboards"
+  env = [ "GRAFANAUSER=${var.mysql_grafana_user}",
+          "GRAFANAUSERPASS=${var.mysql_grafana_user_pass}"
+        ]
   ports {
     internal = 3000
     external = 3000
+  }
+  volumes {
+    read_only = true
+    host_path= "${var.grafana_datasource}" 
+    #host_path="/home/peter/scripts/sourcecontrolled/energy_usage/grafana"
+    container_path="/etc/grafana/provisioning/datasources"
+
   }
   networks_advanced {
     name="energy_network"
