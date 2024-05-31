@@ -3,11 +3,19 @@ Project to visualise my energy usage using Grafana, and to experiment with DevOp
 
 ## Current Status
 
-Currently we have a terraform script which deploys two containers to the local host - mysql and grafana
+The infrastructure consists of :
+* A mysql instance with the `energy` database and a table schema for electricity bill data
+* A grafana instance which has got a mysql datasource configured to connect to the `energy` database with a readonly user.
 
-## Steps to setup
+The infrastructure can be deployed with the `./deploy.sh` script 
 
-* Deploy the containers using terraform.  From the terraform folder run `terraform apply`
-* Run `docker logs MySQL_consumption` and find the generated root password.  Hint.  Its preceeded by `GENERATED ROOT PASSWORD`
-* Create the `energy` database, tables and a read only user.  Run `mysql -h 127.0.0.1 -u root -p < database_setup.sql`.  Enter the password when prompted
+## Prerequisites
 
+* Terraform
+  * Install from https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli
+* Docker CE
+  * Install from https://docs.docker.com/engine/install/
+
+## Steps to setup and configure
+
+* From the repository root, run the `deploy.sh` Bash script.
