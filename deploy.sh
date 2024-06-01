@@ -7,14 +7,8 @@
 #
 #######################################
 
-#Set the following environment variables before running
-#mysql_root_pass - this is the mysql root password
-#mysql_grafana_user - grafanauser
-#mysql_grafana_user_pass - grafanauser password
-
 #Load in the environment variables
 source ./vars.env
-
 
 
 #Copy some of the variables into a form that Terraform can pass
