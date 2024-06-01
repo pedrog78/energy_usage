@@ -12,13 +12,8 @@
 #mysql_grafana_user - grafanauser
 #mysql_grafana_user_pass - grafanauser password
 
-
-export mysql_root_pass=abc12345
-export mysql_grafana_user=grafanauser
-export mysql_grafana_user_pass=passw0rd
-
-#need an absolute path here
-export TF_VAR_grafana_datasource=/home/peter/scripts/sourcecontrolled/energy_usage/grafana
+#Load in the environment variables
+source ./vars.env
 
 
 
@@ -26,7 +21,7 @@ export TF_VAR_grafana_datasource=/home/peter/scripts/sourcecontrolled/energy_usa
 export TF_VAR_mysql_pass=$mysql_root_pass
 export TF_VAR_mysql_grafana_user=$mysql_grafana_user
 export TF_VAR_mysql_grafana_user_pass=$mysql_grafana_user_pass
-
+export TF_VAR_grafana_datasource=$grafana_datasource_path
 
 
 

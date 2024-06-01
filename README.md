@@ -15,6 +15,7 @@ The infrastructure can be deployed with the `./deploy.sh` script
   * Install from https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli
 * Docker CE
   * Install from https://docs.docker.com/engine/install/
+* A `vars.env` file in your repo root containing variables for your install.  Example in vars.env.template
 
 ## Steps to setup and configure
 
